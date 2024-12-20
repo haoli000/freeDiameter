@@ -1,3 +1,12 @@
+freeDiameter Docker with test_app Extension Enabled
+
+This repository provides a patch for building a Docker image of freeDiameter
+with the test_app extension enabled. The Dockerfile is designed to build
+freeDiameter from source, compile it with the test_app extension, and include
+a minimal runtime configuration.
+
+---
+
 freeDiameter is an implementation of the Diameter protocol.
 
 Diameter is a protocol designed to carry Authentication, Authorization and
