@@ -36,7 +36,9 @@ foreach s : fd_ext_sources
 endforeach
 
 subdir('dict_dcca_3gpp')
+subdir('dict_json')
 subdir('acl_wl')
 subdir('rt_redirect')
 subdir('rt_default')
+subdir('rt_rewrite')
 subdir('test_app')

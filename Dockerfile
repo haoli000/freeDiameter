@@ -6,9 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    meson cmake make gcc g++ bison flex libsctp-dev \
+    git meson cmake make gcc g++ bison flex libsctp-dev \
     libgnutls28-dev libgcrypt-dev libidn11-dev libpq-dev \
     libmysqlclient-dev cmake-curses-gui \
+    libjsoncpp-dev libpcre3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -18,11 +19,18 @@ COPY . /usr/src/freeDiameter
 # Set the working directory
 WORKDIR /usr/src
 
+RUN git clone https://github.com/nfotex/json-schema.git && \
+    cd json-schema && \
+    mkdir build && cd build && \
+    cmake -DCMAKE_POSITION_INDEPENDENT_CODE=ON .. && \
+    make && \
+    make install
+
 # Build test_app
-RUN mkdir /usr/src/freeDiameter/build && cd /usr/src/freeDiameter/build && \
-    meson .. && \
-    meson compile && \
-    meson install 
+#RUN mkdir /usr/src/freeDiameter/build && cd /usr/src/freeDiameter/build && \
+#    meson .. && \
+#    meson compile && \
+#    meson install 
 
 # Build freeDimaterd
 RUN mkdir /usr/src/freeDiameter/fDbuild && cd /usr/src/freeDiameter/fDbuild && \
